@@ -19,7 +19,7 @@ int Compare( const char* pszString1, const char* pszString2, const CompareType c
 	return ( compare == CaseSensitive ? strcmp : strcasecmp )( pszString1, pszString2 );
 }
 
-int CompareN( const char* pszString1, const char* pszString2, const size_t uiCount, const CompareType compare )
+int CompareN( const char* pszString1, const char* pszString2, const uint32_t uiCount, const CompareType compare )
 {
 	return ( compare == CaseSensitive ? strncmp : strncasecmp )( pszString1, pszString2, uiCount );
 }
@@ -34,11 +34,11 @@ char* TrimTrailingCharacters( char* pszString, const char character )
 	return TrimTrailingCharacters( pszString, character, strlen( pszString ) );
 }
 
-char* TrimTrailingCharacters( char* pszString, const char character, size_t uiLength )
+char* TrimTrailingCharacters( char* pszString, const char character, uint32_t uiLength )
 {
 	assert( pszString );
 
-	const size_t uiStringLength = strlen( pszString );
+	const uint32_t uiStringLength = strlen( pszString );
 
 	if( uiLength > uiStringLength )
 		uiLength = uiStringLength;
@@ -66,11 +66,11 @@ char* TrimLeadingCharacters( char* pszString, const char character )
 	return TrimLeadingCharacters( pszString, character, strlen( pszString ) );
 }
 
-char* TrimLeadingCharacters( char* pszString, const char character, size_t uiCount )
+char* TrimLeadingCharacters( char* pszString, const char character, uint32_t uiCount )
 {
 	assert( pszString );
 
-	const size_t uiStringLength = strlen( pszString );
+	const uint32_t uiStringLength = strlen( pszString );
 
 	if( uiCount > uiStringLength )
 		uiCount = uiStringLength;
@@ -217,21 +217,21 @@ CString::CString( const int iValue )
 	*this = iValue;
 }
 
-CString::CString( const unsigned int uiValue )
+CString::CString( const uint32_t uiValue )
 {
 	Construct();
 
 	*this = uiValue;
 }
 
-CString::CString( const long long int iValue )
+CString::CString( const int64_t iValue )
 {
 	Construct();
 
 	*this = iValue;
 }
 
-CString::CString( const unsigned long long int uiValue )
+CString::CString( const uint64_t uiValue )
 {
 	Construct();
 
@@ -324,7 +324,7 @@ CString& CString::operator=( const int iValue )
 	return *this;
 }
 
-CString& CString::operator=( const unsigned int uiValue )
+CString& CString::operator=( const uint32_t uiValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -335,7 +335,7 @@ CString& CString::operator=( const unsigned int uiValue )
 	return *this;
 }
 
-CString& CString::operator=( const long long int iValue )
+CString& CString::operator=( const int64_t iValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -346,7 +346,7 @@ CString& CString::operator=( const long long int iValue )
 	return *this;
 }
 
-CString& CString::operator=( const unsigned long long int uiValue )
+CString& CString::operator=( const uint64_t uiValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -479,14 +479,14 @@ void CString::SetCharAt( size_type uiIndex, char character )
 	m_pszString[ uiIndex ] = character;
 }
 
-const char& CString::operator[]( size_t uiIndex ) const
+const char& CString::operator[]( uint32_t uiIndex ) const
 {
 	assert( uiIndex < m_uiLength );
 
 	return m_pszString[ uiIndex ];
 }
 
-char& CString::operator[]( size_t uiIndex )
+char& CString::operator[]( uint32_t uiIndex )
 {
 	assert( uiIndex < m_uiLength );
 
@@ -519,7 +519,7 @@ CString& CString::Append( const char* pszString, size_type uiBegin, size_type ui
 {
 	assert( pszString );
 
-	const size_t uiLength = strlen( pszString );
+	const uint32_t uiLength = strlen( pszString );
 
 	if( uiLength == 0 )
 	{
@@ -591,7 +591,7 @@ CString& CString::operator+=( const int iValue )
 	return *this;
 }
 
-CString& CString::operator+=( const unsigned int uiValue )
+CString& CString::operator+=( const uint32_t uiValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -601,7 +601,7 @@ CString& CString::operator+=( const unsigned int uiValue )
 	return *this;
 }
 
-CString& CString::operator+=( const long long int iValue )
+CString& CString::operator+=( const int64_t iValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -611,7 +611,7 @@ CString& CString::operator+=( const long long int iValue )
 	return *this;
 }
 
-CString& CString::operator+=( const unsigned long long int uiValue )
+CString& CString::operator+=( const uint64_t uiValue )
 {
 	char szBuffer[ MINIMUM_PRINTF_BUFFER_SIZE ];
 
@@ -722,7 +722,7 @@ bool CString::EndsWith( const char* pszString, const String::CompareType compare
 {
 	assert( pszString );
 
-	const size_t uiLength = strlen( pszString );
+	const uint32_t uiLength = strlen( pszString );
 
 	if( Length() < uiLength )
 		return false;
@@ -750,7 +750,7 @@ CString::size_type CString::Find( const char* pszString, const size_type uiStart
 {
 	assert( pszString );
 
-	const size_t uiLength = strlen( pszString );
+	const uint32_t uiLength = strlen( pszString );
 
 	if( Length() < uiLength )
 		return INVALID_INDEX;
@@ -800,7 +800,7 @@ CString::size_type CString::RFind( const char* pszString, const size_type uiStar
 	if( !( *pszString ) )
 		return INVALID_INDEX;
 
-	const size_t uiLength = strlen( pszString );
+	const uint32_t uiLength = strlen( pszString );
 
 	if( Length() < uiLength )
 		return INVALID_INDEX;
@@ -881,7 +881,7 @@ CString::size_type CString::FindLastOf( const CString& szCharacters, const size_
 	return INVALID_INDEX;
 }
 
-CString::size_type CString::FindFirstNotOf( const char* pszString, size_t uiStartIndex, const String::CompareType compare ) const
+CString::size_type CString::FindFirstNotOf( const char* pszString, uint32_t uiStartIndex, const String::CompareType compare ) const
 {
 	if( !pszString )
 		return INVALID_INDEX;
@@ -889,12 +889,12 @@ CString::size_type CString::FindFirstNotOf( const char* pszString, size_t uiStar
 	return FindFirstNotOf( CString( pszString ), uiStartIndex, compare );
 }
 
-CString::size_type CString::FindFirstNotOf( const CString& str, size_t uiStartIndex, const String::CompareType compare ) const
+CString::size_type CString::FindFirstNotOf( const CString& str, uint32_t uiStartIndex, const String::CompareType compare ) const
 {
 	if( str.IsEmpty() || IsEmpty() )
 		return -1;
 
-	const size_t uiMyLength = Length();
+	const uint32_t uiMyLength = Length();
 
 	if( uiStartIndex >= uiMyLength )
 		return INVALID_INDEX;
@@ -907,7 +907,7 @@ CString::size_type CString::FindFirstNotOf( const CString& str, size_t uiStartIn
 	return ( *pszMyString ? pszMyString - m_pszString : INVALID_INDEX );
 }
 
-CString::size_type CString::FindLastNotOf( const char* pszString, size_t uiStartIndex, const String::CompareType compare ) const
+CString::size_type CString::FindLastNotOf( const char* pszString, uint32_t uiStartIndex, const String::CompareType compare ) const
 {
 	if( !pszString ) 
 		return INVALID_INDEX;
@@ -915,12 +915,12 @@ CString::size_type CString::FindLastNotOf( const char* pszString, size_t uiStart
 	return FindLastNotOf( CString( pszString ), uiStartIndex, compare );
 }
 
-CString::size_type CString::FindLastNotOf( const CString& str, size_t uiStartIndex, const String::CompareType compare ) const
+CString::size_type CString::FindLastNotOf( const CString& str, uint32_t uiStartIndex, const String::CompareType compare ) const
 {
 	if( str.IsEmpty() || IsEmpty() )
 		return -1;
 
-	const size_t uiMyLength = Length();
+	const uint32_t uiMyLength = Length();
 
 	if( uiStartIndex == INVALID_INDEX )
 		uiStartIndex = uiMyLength - 1;
@@ -1015,7 +1015,7 @@ CString& CString::Replace( const char* pszSubString, const char* pszReplacement,
 	{
 		CString szResult;
 
-		const size_t uiLength = strlen( pszSubString );
+		const uint32_t uiLength = strlen( pszSubString );
 
 		for( auto it = Begin(), end = End(); it != end; ++it )
 		{
@@ -1090,17 +1090,17 @@ CString operator+( const CString& string, const int iValue )
 	return CString( string ) += iValue;
 }
 
-CString operator+( const CString& string, const unsigned int uiValue )
+CString operator+( const CString& string, const uint32_t uiValue )
 {
 	return CString( string ) += uiValue;
 }
 
-CString operator+( const CString& string, const long long int iValue )
+CString operator+( const CString& string, const int64_t iValue )
 {
 	return CString( string ) += iValue;
 }
 
-CString operator+( const CString& string, const unsigned long long int uiValue )
+CString operator+( const CString& string, const uint64_t uiValue )
 {
 	return CString( string ) += uiValue;
 }

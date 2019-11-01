@@ -20,7 +20,7 @@ static const CompareType DEFAULT_COMPARE = CaseSensitive;
 int CompareCharacters( const char char1, const char char2, const CompareType compare = DEFAULT_COMPARE );
 
 int Compare( const char* pszString1, const char* pszString2, const CompareType compare = DEFAULT_COMPARE );
-int CompareN( const char* pszString1, const char* pszString2, const size_t uiCount, const CompareType compare = DEFAULT_COMPARE );
+int CompareN( const char* pszString1, const char* pszString2, const uint32_t uiCount, const CompareType compare = DEFAULT_COMPARE );
 
 /*
 * A map of constants true and false to '1' and '0'
@@ -32,7 +32,7 @@ char BoolToCharacter( const bool fValue );
 * The string is guaranteed to have at least 1 character in it after trimming, even if that character is the given one
 */
 char* TrimTrailingCharacters( char* pszString, const char character );
-char* TrimTrailingCharacters( char* pszString, const char character, size_t uiLength );
+char* TrimTrailingCharacters( char* pszString, const char character, uint32_t uiLength );
 
 /*
 * Trim leading characters
@@ -40,7 +40,7 @@ char* TrimTrailingCharacters( char* pszString, const char character, size_t uiLe
 * uiCount: if the string is longer than this, only trim up to uiCount leading characters
 */
 char* TrimLeadingCharacters( char* pszString, const char character );
-char* TrimLeadingCharacters( char* pszString, const char character, size_t uiCount );
+char* TrimLeadingCharacters( char* pszString, const char character, uint32_t uiCount );
 
 /*
 * Trim characters
@@ -56,7 +56,7 @@ char* TrimCharacters( char* pszString, const char character );
 class CString
 {
 public:
-	typedef size_t size_type;
+	typedef uint32_t size_type;
 	typedef const char* const_iterator;
 	typedef char* iterator;
 
@@ -96,9 +96,9 @@ public:
 	CString( const bool fValue );
 	CString( const char character );
 	CString( const int iValue );
-	CString( const unsigned int uiValue );
-	CString( const long long int iValue );
-	CString( const unsigned long long int uiValue );
+	CString( const uint32_t uiValue );
+	CString( const int64_t iValue );
+	CString( const uint64_t uiValue );
 	CString( const float flValue );
 	CString( const double flValue );
 
@@ -112,9 +112,9 @@ public:
 	CString& operator=( const bool fValue );
 	CString& operator=( const char character );
 	CString& operator=( const int iValue );
-	CString& operator=( const unsigned int uiValue );
-	CString& operator=( const long long int iValue );
-	CString& operator=( const unsigned long long int uiValue );
+	CString& operator=( const uint32_t uiValue );
+	CString& operator=( const int64_t iValue );
+	CString& operator=( const uint64_t uiValue );
 	CString& operator=( const float flValue );
 	CString& operator=( const double flValue );
 
@@ -166,8 +166,8 @@ public:
 	void SetCharAt( size_type uiIndex, char character );
 
 	//Direct access, no bounds checking
-	const char& operator[]( size_t uiIndex ) const;
-	char& operator[]( size_t uiIndex );
+	const char& operator[]( uint32_t uiIndex ) const;
+	char& operator[]( uint32_t uiIndex );
 
 	CString& operator+=( const char* pszString );
 
@@ -179,9 +179,9 @@ public:
 	CString& operator+=( const bool fValue );
 	CString& operator+=( const char character );
 	CString& operator+=( const int iValue );
-	CString& operator+=( const unsigned int uiValue );
-	CString& operator+=( const long long int iValue );
-	CString& operator+=( const unsigned long long int uiValue );
+	CString& operator+=( const uint32_t uiValue );
+	CString& operator+=( const int64_t iValue );
+	CString& operator+=( const uint64_t uiValue );
 	CString& operator+=( const float flValue );
 	CString& operator+=( const double flValue );
 
@@ -225,11 +225,11 @@ public:
 	size_type FindLastOf( const char* pszCharacters, const size_type uiStartOffset = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
 	size_type FindLastOf( const CString& szCharacters, const size_type uiStartOffset = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
 
-	size_type FindFirstNotOf( const char* pszString, size_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
-	size_type FindFirstNotOf( const CString& str, size_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
+	size_type FindFirstNotOf( const char* pszString, uint32_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
+	size_type FindFirstNotOf( const CString& str, uint32_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
 
-	size_type FindLastNotOf( const char* pszString, size_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
-	size_type FindLastNotOf( const CString& str, size_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
+	size_type FindLastNotOf( const char* pszString, uint32_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
+	size_type FindLastNotOf( const CString& str, uint32_t uiStartIndex = 0, const String::CompareType compare = String::DEFAULT_COMPARE ) const;
 
 	void Format( const char* pszFormat, ... );
 
@@ -296,9 +296,9 @@ CString operator+( const CString& string, const CString& other );
 CString operator+( const CString& string, const bool fValue );
 CString operator+( const CString& string, const char character );
 CString operator+( const CString& string, const int iValue );
-CString operator+( const CString& string, const unsigned int uiValue );
-CString operator+( const CString& string, const long long int iValue );
-CString operator+( const CString& string, const unsigned long long int uiValue );
+CString operator+( const CString& string, const uint32_t uiValue );
+CString operator+( const CString& string, const int64_t iValue );
+CString operator+( const CString& string, const uint64_t uiValue );
 CString operator+( const CString& string, const float flValue );
 CString operator+( const CString& string, const double flValue );
 
